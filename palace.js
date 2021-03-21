@@ -36,6 +36,7 @@
   // Super lovely: 12080350
   // Nice NFT exhibit: 12080425
   // Adorable early exhibit: 7280024
+  // Beautiful block: 12081620
 
     //queueMicrotask = requestAnimationFrame if not window.queueMicrotask
   [l3d, lxo] = root.querySelectorAll('[pr]');
@@ -479,7 +480,6 @@ void main () {
     if (typeof bloverride === 'number') {
       return ff(bloverride);
     } else {
-      throw new Error("WHY are we here?", ff);
       return eth3('getBlockNumber', ff);
     }
   };
@@ -491,8 +491,9 @@ void main () {
   blockPlease(function(ans) {
     //return xl "X1.",err if err
     xl(ans);
-    console.info("TO BE CLEAR this is block", ans);
-    
+    document.querySelector('[pr=bl]').textContent = ans; // may not have been known at html-time
+    //console.info "TO BE CLEAR this is block",ans
+
     return eth3('getBlock', ans, function(ans) {
       var tnxt, trtotal, trworkset;
       //return xl "X2.",err if err

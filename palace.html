@@ -62,7 +62,10 @@ if (location.href.match(/^file:/))
 		onkeypress="if (event.keyCode == 13) this.click()"
 		onclick="
 			let nx = prompt('Any block you\'d like:',this.textContent.trim())
-			if (!nx) return;
+			if (!nx) {
+				queueMicrotask(() => this.blur());
+				return;
+			}
 			nx = nx.trim();
 			if (blok(nx))
 				location.href = `./palace.html?${nx}`
@@ -79,9 +82,11 @@ function blok (bl) {
 let bl = location.href.split('?')[1] || ''
 if (blok(bl))
 	bloverride = Number(bl)
+else if (bl == 'current')
+	bloverride = false
 else
 	bloverride = 12078602
-document.querySelector('[pr=bl]').textContent = bloverride
+document.querySelector('[pr=bl]').textContent = bloverride || ''
 </script>
 
 <script>

@@ -22,6 +22,7 @@ root = document.body
 # Super lovely: 12080350
 # Nice NFT exhibit: 12080425
 # Adorable early exhibit: 7280024
+# Beautiful block: 12081620
 
 #queueMicrotask = requestAnimationFrame if not window.queueMicrotask
 
@@ -369,7 +370,6 @@ blockPlease = (ff) ->
 	if typeof bloverride is 'number'
 		ff bloverride
 	else
-		throw new Error "WHY are we here?",ff
 		eth3 'getBlockNumber',ff
 ended = ->
 	#console.info "All done! \\o/"
@@ -377,7 +377,8 @@ ended = ->
 blockPlease (ans) ->
 	#return xl "X1.",err if err
 	xl ans
-	console.info "TO BE CLEAR this is block",ans
+	document.querySelector('[pr=bl]').textContent = ans # may not have been known at html-time
+	#console.info "TO BE CLEAR this is block",ans
 	#
 	eth3 'getBlock',ans,(ans) ->
 		#return xl "X2.",err if err
