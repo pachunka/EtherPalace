@@ -1,6 +1,9 @@
 <!doctype html>
 <meta charset="utf-8">
-<script src="../Primary/Reloads.js"></script> <!-- auto reloads on change -->
+<script>
+if (location.href.match(/^file:/))
+	document.write('<script src="../Primary/Reloads.js"><'+'/script>')
+</script>
 <style>
 :root {
 	background:#000;
@@ -39,7 +42,7 @@
 		class="lb"
 		style="
 			padding:0.2em;
-			font:bold 0.8vh Courier,sans-serif; /* I like Arial. Blame PIRCH. */
+			font:0.8vh Arial,sans-serif; /* I like Arial. Blame PIRCH. */
 			letter-spacing:-0.01em;
 			transform:
 				translateX(-50%)
@@ -75,15 +78,22 @@ function blok (bl) {
 }
 let bl = location.href.split('?')[1] || ''
 if (blok(bl))
-	bloverride = bl
+	bloverride = Number(bl)
 else
-	bloverride = '12078602'
+	bloverride = 12078602
 document.querySelector('[pr=bl]').textContent = bloverride
 </script>
 
-<script src="../Stolen/web3.js"></script>
-<script src="../Stolen/thr.js"></script>
-<!--script src="https://unpkg.com/three@0.126.1/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script-->
-<script src="preload.js"></script>
-<script src="palace.js"></script>
+<script>
+if (location.href.match(/^file:/)) {
+	document.write('<script src="../Stolen/web3.js"><'+'/script>')
+	document.write('<script src="../Stolen/thr.js"><'+'/script>')
+}
+else {
+	document.write('<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"><'+'/script>')
+	document.write('<script src="https://unpkg.com/three@0.126.1/build/three.min.js"><'+'/script>')
+}
+//document.write('<script src="preload.js"><'+'/script>')
+document.write('<script src="palace.js"><'+'/script>')
+</script>
+

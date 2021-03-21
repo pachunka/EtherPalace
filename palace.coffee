@@ -369,6 +369,7 @@ blockPlease = (ff) ->
 	if typeof bloverride is 'number'
 		ff bloverride
 	else
+		throw new Error "WHY are we here?",ff
 		eth3 'getBlockNumber',ff
 ended = ->
 	#console.info "All done! \\o/"
@@ -376,6 +377,7 @@ ended = ->
 blockPlease (ans) ->
 	#return xl "X1.",err if err
 	xl ans
+	console.info "TO BE CLEAR this is block",ans
 	#
 	eth3 'getBlock',ans,(ans) ->
 		#return xl "X2.",err if err
@@ -384,12 +386,12 @@ blockPlease (ans) ->
 		#return
 		#
 		trtotal = ans.transactions.length
-		trworkset = ans.transactions.slice 0,512 # some vintage blocks are HUGE and I need some kind of cap
+		trworkset = ans.transactions.slice 0 #512 # testing a theory
 		tnxt = ->
 			return if not pulse.alive
 			return ended() if not trworkset.length
 			#
-			#setTimeout tnxt,50 # spread it out a tiny bit
+			setTimeout tnxt,50 # spread it out a tiny bit
 			#
 			tn = trworkset.shift()
 			xl '___________________________________'
@@ -410,39 +412,40 @@ blockPlease (ans) ->
 					# sorry; not depicting burns. assuming that's what these nulls are.
 					tnxt()
 					return
-				eth3 'getCode',tna.to,(bca) -> # bca / bytecode actual
-					return if not pulse.alive
-					#
-					xl ascpls tna.input
-					xl bca
-					xl ''
-					#xl "ASCII:"
-					#xl ascpls bca
-					eth3 'getTransactionReceipt',tna.hash,(rca) ->
-						xl "My receipt for your receipt:"
-						xl rca
-						# HOPEFULLY this person is right <3
-						# https://ethereum.stackexchange.com/questions/80285/difference-between-erc-20-and-erc-721-transaction-receipt
-						# Upon experimentation: topics.length seems to hold up as solid.
-						tstate = 0 # 1 for token, 2 for nft
+				do (tna) ->
+					eth3 'getCode',tna.to,(bca) -> # bca / bytecode actual
+						return if not pulse.alive
 						#
-						# This loop will only break on '4' because if a transaction did both regular and NFT tokens
-						# (seems UNLIKELY but seems perfectly possible) then I want to primarily reflect the NFT.
-						for ev from rca.logs
-							if ev.topics[0] == token_smash
-								if ev.topics.length is 4
-									tstate = 2
-									break
-								if ev.topics.length is 3
-									tstate = 1
-							#else
-							#	console.info "It's NOT tokenny.",tna.hash,ev.topics[0],ev.topics.length
-						#
-						addDiamond trtotal,tna,tna.from,tstate # ALSO wrong: THIS might be a contract
-						addPyramid trtotal,tna,tna.to,bca,tstate # this call is getting out of hand, but tidyness isn't my priority rn.
-						tnxt()
+						xl ascpls tna.input
+						xl bca
+						xl ''
+						#xl "ASCII:"
+						#xl ascpls bca
+						eth3 'getTransactionReceipt',tna.hash,(rca) ->
+							xl "My receipt for your receipt:"
+							xl rca
+							# HOPEFULLY this person is right <3
+							# https://ethereum.stackexchange.com/questions/80285/difference-between-erc-20-and-erc-721-transaction-receipt
+							# Upon experimentation: topics.length seems to hold up as solid.
+							tstate = 0 # 1 for token, 2 for nft
+							#
+							# This loop will only break on '4' because if a transaction did both regular and NFT tokens
+							# (seems UNLIKELY but seems perfectly possible) then I want to primarily reflect the NFT.
+							for ev from rca.logs
+								if ev.topics[0] == token_smash
+									if ev.topics.length is 4
+										tstate = 2
+										break
+									if ev.topics.length is 3
+										tstate = 1
+								#else
+								#	console.info "It's NOT tokenny.",tna.hash,ev.topics[0],ev.topics.length
+							#
+							addDiamond trtotal,tna,tna.from,tstate # ALSO wrong: THIS might be a contract
+							addPyramid trtotal,tna,tna.to,bca,tstate # this call is getting out of hand, but tidyness isn't my priority rn.
+							tnxt()
+							return
 						return
-					return
 				return
 			return # all the way home.
 		tnxt()
