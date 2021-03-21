@@ -1,0 +1,76 @@
+<!doctype html>
+<meta charset="utf-8">
+<script src="../Primary/Reloads.js"></script> <!-- auto reloads on change -->
+<style>
+:root {
+	background:#000;
+	color:#74C;
+}
+:root,body {
+	height:100%;
+	overflow:hidden;
+}
+.ly {
+	position:absolute;
+	left:0;
+	right:0;
+	bottom:0;
+	top:0;
+	transform-style:preserve-3d;
+}
+.lt {
+	position:absolute;
+	left:50%;
+	top:50%;
+	width:auto;
+	transform-origin:50% 50%;
+	transform-style:preserve-3d;
+}
+.lb {
+	position:absolute;
+	left:50%;
+	bottom:0;
+	width:auto;
+	transform-origin:50% 100%;
+	transform-style:preserve-3d;
+}
+</style>
+
+<div class="ly" pr="3d"></div>
+<div class="ly" pr="xo" style="mix-blend-mode:screen;pointer-events:none"></div>
+
+<div class="ly" style="perspective:10vh;mix-blend-mode:screen;" >
+	<!--div class="lt">
+		<pad class="lt bbl" style="
+			padding:2em 1em;
+			transform:translateX(-50%) translateY(-50%) scale(3)  rotateX(70deg)
+		">
+			CONNECT
+		</pad>
+	</div-->
+	<div class="lb" style="
+		padding:0.2em;
+		font:medium Arial,sans-serif; /* I like Arial. Blame PIRCH. */
+		transform:translateX(-50%) translateY(-100%) scale(2,4) rotateX(70deg);
+		text-shadow:
+			 0 0 5px currentColor
+			,0 0 5px currentColor
+		;
+	" pr="bl"></div>
+</div>
+
+<script>
+let bl = location.href.split('?')[1] || ''
+if (bl.match(/^%\d+$/))
+	bloverride = bl
+else
+	bloverride = '12078602'
+document.querySelector('[pr=bl]').textContent = bloverride
+</script>
+
+<script src="../Stolen/web3.js"></script>
+<script src="../Stolen/thr.js"></script>
+<!--script src="https://unpkg.com/three@0.126.1/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script-->
+<script src="preload.js"></script>
+<script src="palace.js"></script>
