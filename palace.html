@@ -42,7 +42,7 @@ if (location.href.match(/^file:/))
 		class="lb"
 		style="
 			padding:0.2em;
-			font:0.8vh Arial,sans-serif; /* I like Arial. Blame PIRCH. */
+			font:bold 0.8vh Georgia,sans-serif; /* I like Arial. Blame PIRCH. */
 			letter-spacing:-0.01em;
 			transform:
 				translateX(-50%)
@@ -61,7 +61,7 @@ if (location.href.match(/^file:/))
 		tabindex="0"
 		onkeypress="if (event.keyCode == 13) this.click()"
 		onclick="
-			let nx = prompt('Any block you\'d like:',this.textContent.trim())
+			let nx = prompt('Any block you\'d like, or type &quot;current&quot;:',this.textContent.trim())
 			if (!nx) {
 				queueMicrotask(() => this.blur());
 				return;
@@ -69,6 +69,8 @@ if (location.href.match(/^file:/))
 			nx = nx.trim();
 			if (blok(nx))
 				location.href = `./palace.html?${nx}`
+			else if (nx.toLowerCase() == 'current')
+				location.href = './palace.html?current'
 			else
 				 arguments.callee.call(this)
 		"
