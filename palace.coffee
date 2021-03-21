@@ -404,6 +404,12 @@ blockPlease (ans) ->
 					tnxt()
 					return
 				#else
+				if tna.hash is '0x4b11e4f0838e0f67fb4f3bf44df581138ed2d1f30464f50acc9e02bb516a9269'
+					console.info "You wanted to know:",tna.to
+				if not tna.to
+					# sorry; not depicting burns. assuming that's what these nulls are.
+					tnxt()
+					return
 				eth3 'getCode',tna.to,(bca) -> # bca / bytecode actual
 					return if not pulse.alive
 					#

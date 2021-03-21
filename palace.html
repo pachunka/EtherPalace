@@ -26,6 +26,9 @@
 	transform-origin:50% 100%;
 	transform-style:preserve-3d;
 }
+[onclick]:active {
+	opacity:.5;
+}
 </style>
 
 <div class="ly" pr="3d"></div>
@@ -36,7 +39,8 @@
 		class="lb"
 		style="
 			padding:0.2em;
-			font:0.8vh Arial,sans-serif; /* I like Arial. Blame PIRCH. */
+			font:bold 0.8vh Courier,sans-serif; /* I like Arial. Blame PIRCH. */
+			letter-spacing:-0.01em;
 			transform:
 				translateX(-50%)
 				translateY(-100%)
@@ -44,8 +48,8 @@
 				rotateX(70deg)
 			;
 			text-shadow:
-				 0 0 5px currentColor
-				,0 0 5px currentColor
+				 0 0 3px currentColor
+				,0 0 3px currentColor
 			;
 			user-select:none;
 			cursor:pointer;
@@ -54,7 +58,7 @@
 		tabindex="0"
 		onkeypress="if (event.keyCode == 13) this.click()"
 		onclick="
-			let nx = prompt('Any block no. you\'d like:',this.textContent.trim())
+			let nx = prompt('Any block you\'d like:',this.textContent.trim())
 			if (!nx) return;
 			nx = nx.trim();
 			if (blok(nx))
