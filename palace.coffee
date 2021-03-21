@@ -29,17 +29,15 @@ root = document.body
 
 #
 
-bloverride = no
+#bloverride = no
 #bloverride = 7280024
 
 # super mega ultra cache
-#window.SMUC = {}
+window.SMUC = {}
 cache_only = no
-spymode = no
-##
+###
 bloverride = no
 cache_only = yes
-spymode = yes
 # ###
 
 # let let let
@@ -391,7 +389,7 @@ blockPlease (ans) ->
 			return if not pulse.alive
 			return ended() if not trworkset.length
 			#
-			setTimeout tnxt,50 # spread it out a tiny bit
+			#setTimeout tnxt,50 # spread it out a tiny bit
 			#
 			tn = trworkset.shift()
 			xl '___________________________________'

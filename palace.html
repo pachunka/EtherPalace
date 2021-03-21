@@ -18,14 +18,6 @@
 	top:0;
 	transform-style:preserve-3d;
 }
-.lt {
-	position:absolute;
-	left:50%;
-	top:50%;
-	width:auto;
-	transform-origin:50% 50%;
-	transform-style:preserve-3d;
-}
 .lb {
 	position:absolute;
 	left:50%;
@@ -40,20 +32,17 @@
 <div class="ly" pr="xo" style="mix-blend-mode:screen;pointer-events:none"></div>
 
 <div class="ly" style="perspective:10vh;mix-blend-mode:screen;" >
-	<!--div class="lt">
-		<pad class="lt bbl" style="
-			padding:2em 1em;
-			transform:translateX(-50%) translateY(-50%) scale(3)  rotateX(70deg)
-		">
-			CONNECT
-		</pad>
-	</div-->
 	<div
 		class="lb"
 		style="
 			padding:0.2em;
-			font:medium Arial,sans-serif; /* I like Arial. Blame PIRCH. */
-			transform:translateX(-50%) translateY(-100%) scale(2,4) rotateX(70deg);
+			font:0.8vh Arial,sans-serif; /* I like Arial. Blame PIRCH. */
+			transform:
+				translateX(-50%)
+				translateY(-100%)
+				scale(2.8,3.3)
+				rotateX(70deg)
+			;
 			text-shadow:
 				 0 0 5px currentColor
 				,0 0 5px currentColor
@@ -69,7 +58,7 @@
 			if (!nx) return;
 			nx = nx.trim();
 			if (blok(nx))
-				location.href = `.?${nx}`
+				location.href = `./palace.html?${nx}`
 			else
 				 arguments.callee.call(this)
 		"
