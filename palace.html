@@ -48,20 +48,40 @@
 			CONNECT
 		</pad>
 	</div-->
-	<div class="lb" style="
-		padding:0.2em;
-		font:medium Arial,sans-serif; /* I like Arial. Blame PIRCH. */
-		transform:translateX(-50%) translateY(-100%) scale(2,4) rotateX(70deg);
-		text-shadow:
-			 0 0 5px currentColor
-			,0 0 5px currentColor
-		;
-	" pr="bl"></div>
+	<div
+		class="lb"
+		style="
+			padding:0.2em;
+			font:medium Arial,sans-serif; /* I like Arial. Blame PIRCH. */
+			transform:translateX(-50%) translateY(-100%) scale(2,4) rotateX(70deg);
+			text-shadow:
+				 0 0 5px currentColor
+				,0 0 5px currentColor
+			;
+			user-select:none;
+			cursor:pointer;
+		"
+		pr="bl"
+		tabindex="0"
+		onkeypress="if (event.keyCode == 13) this.click()"
+		onclick="
+			let nx = prompt('Any block no. you\'d like:',this.textContent.trim())
+			if (!nx) return;
+			nx = nx.trim();
+			if (blok(nx))
+				location.href = `.?${nx}`
+			else
+				 arguments.callee.call(this)
+		"
+	></div>
 </div>
 
 <script>
+function blok (bl) {
+	return bl.match(/^\d+$/)
+}
 let bl = location.href.split('?')[1] || ''
-if (bl.match(/^%\d+$/))
+if (blok(bl))
 	bloverride = bl
 else
 	bloverride = '12078602'
